@@ -28,7 +28,9 @@
 button {
     --border-radius: 25px;
     --border-width: 7px;
-    appearance: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
     position: relative;
     padding: 1em 2em;
     border: 0;
@@ -63,7 +65,8 @@ button {
     mask-image: var(--m-i), var(--m-i);
     -webkit-mask-origin: var(--m-o);
     mask-origin: var(--m-o);
-    mask-clip: var(--m-o);
+    -webkit-mask-clip: var(--m-o);
+            mask-clip: var(--m-o);
     mask-composite: exclude;
     -webkit-mask-composite: destination-out;
     filter: hue-rotate(0);
@@ -168,3 +171,4 @@ button {
     color: #000;
     font-weight: bold;
   }
+
