@@ -26,6 +26,21 @@
     background-image: url('/storage/images/chat.jpg');
     background-size: 520px;
 }
+.msg{
+    width: 51%;
+    max-width: 51%;
+    min-width: 51%;
+}
+
+.msg-am{
+    float: right;
+    background-color: rgb(155, 255, 155);
+}
+
+.msg-you{
+    float: left;
+    background-color: rgb(195, 216, 255);
+}
 /* ------------------ */
 button {
     --border-radius: 25px;

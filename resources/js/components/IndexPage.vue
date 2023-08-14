@@ -24,8 +24,19 @@
                                 <img :src="'/'+name.image" class="w-100 h-100"  :alt="name.name">
                             </div>
                         </div>
-                        <div class="w-100 box-message" style="height: 70.5vh;">
+                        <div class="w-100 box-message overflow-y-scroll p-3" style="height: 70.5vh;">
 
+                            <div class="msg msg-am my-2 px-2 py-1 rounded" >
+                                <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">hi...!</p>
+                                <hr class="bg-secondary p-0 m-0">
+                                <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">199/19/99 00:00:00</p>
+                            </div>
+
+                            <div class="msg msg-you my-2 px-2 py-1 rounded" >
+                                <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">hi...!</p>
+                                <hr class="bg-secondary p-0 m-0">
+                                <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">199/19/99 00:00:00</p>
+                            </div>
                         </div>
                         <div class="w-100 d-flex justify-content-center" style="height: 10vh;">
                             <div class="Message">
