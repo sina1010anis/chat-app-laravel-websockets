@@ -20475,7 +20475,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     users: Object,
-    box_msg: String
+    box_msg: String,
+    name: Object
   }
 });
 
@@ -20506,44 +20507,63 @@ var _hoisted_3 = {
 var _hoisted_4 = {
   "class": "col-3 h-100 m-0 overflow-y-scroll"
 };
-var _hoisted_5 = {
+var _hoisted_5 = ["href"];
+var _hoisted_6 = {
   "class": "image-profile overflow-hidden"
 };
-var _hoisted_6 = ["src", "alt"];
-var _hoisted_7 = {
+var _hoisted_7 = ["src", "alt"];
+var _hoisted_8 = {
   "class": "my-color-b-500 name-profile d-flex justify-content-center align-items-center"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "my-font-IYB my-f-15 m-1"
 };
-var _hoisted_9 = ["id"];
-var _hoisted_10 = {
-  "class": "col-9 h-100 m-0"
-};
+var _hoisted_10 = ["id"];
 var _hoisted_11 = {
-  key: 0
+  "class": "col-9 h-100 m-0 p-0"
 };
 var _hoisted_12 = {
+  key: 0
+};
+var _hoisted_13 = {
+  "class": "w-100 p-4 shadow d-flex justify-content-between align-items-center",
+  style: {
+    "height": "12vh"
+  }
+};
+var _hoisted_14 = {
+  "class": "my-font-IYB my-f-19 m-1"
+};
+var _hoisted_15 = {
+  "class": "image-profile overflow-hidden my-sc-1-5"
+};
+var _hoisted_16 = ["src", "alt"];
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-100 box-message\" style=\"height:70.5vh;\"></div><div class=\"w-100 d-flex justify-content-center\" style=\"height:10vh;\"><div class=\"Message\"><input title=\"Write Message\" tabindex=\"i\" pattern=\"\\d+\" placeholder=\"Message..\" class=\"MsgInput\" type=\"text\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.0\" width=\"30.000000pt\" height=\"30.000000pt\" viewBox=\"0 0 30.000000 30.000000\" preserveAspectRatio=\"xMidYMid meet\" class=\"SendSVG\"><g transform=\"translate(0.000000,30.000000) scale(0.100000,-0.100000)\" fill=\"#ffffff70\" stroke=\"none\"><path d=\"M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z\"></path></g></svg><span class=\"l\"></span></div></div>", 2);
+var _hoisted_19 = {
   key: 1,
   "class": "w-100 h-100 d-flex justify-content-center align-items-center"
 };
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Please select the chat you want, then it is possible to send a message...!", -1 /* HOISTED */);
-var _hoisted_14 = [_hoisted_13];
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Please select the chat you want, then it is possible to send a message...!", -1 /* HOISTED */);
+var _hoisted_21 = [_hoisted_20];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.users, function (user, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
-      href: "/",
+      href: '/show/message/' + user.name,
       key: index,
       "class": "mt-2 rounded-0 my-pointer bn w-100 p-2 d-flex justify-content-between align-items-center"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-      src: user.image,
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: '/' + user.image,
       "class": "w-100 h-100",
       alt: user.name
-    }, null, 8 /* PROPS */, _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, null, 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       id: 'status_online_' + user.id,
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(user.status == 1 ? 'status-online' : 'status-offline')
-    }, null, 10 /* CLASS, PROPS */, _hoisted_9)])]);
-  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [$props.box_msg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, " if ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])])])]);
+    }, null, 10 /* CLASS, PROPS */, _hoisted_10)])], 8 /* PROPS */, _hoisted_5);
+  }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [$props.box_msg ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.name.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: '/' + $props.name.image,
+    "class": "w-100 h-100",
+    alt: $props.name.name
+  }, null, 8 /* PROPS */, _hoisted_16)])]), _hoisted_17])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, _hoisted_21))])])])]);
 }
 
 /***/ }),

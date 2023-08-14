@@ -22,8 +22,10 @@ class MessageController extends Controller
             : $this->isOffline($request->user['id']);
     }
 
-    public function show_message()
+    public function showMessage(User $name)
     {
-
+        $users= User::where('id' , '!=' , auth()->user()->id)->latest('id')->get();
+        $box_msg = true;
+        return view('welcome' , compact('users' , 'box_msg' , 'name'));
     }
 }

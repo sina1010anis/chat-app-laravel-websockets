@@ -8,7 +8,6 @@
 .image-profile{
     width: 60px;
     height: 60px;
-    background-color: red;
     border-radius: 50%;
 }
 .status-online{
@@ -23,7 +22,10 @@
     border-radius: 50%;    background-color: rgb(255, 0, 0);
 
 }
-
+.box-message{
+    background-image: url('/storage/images/chat.jpg');
+    background-size: 520px;
+}
 /* ------------------ */
 button {
     --border-radius: 25px;
@@ -170,5 +172,54 @@ button {
   .bn:active {
     color: #000;
     font-weight: bold;
+  }
+
+
+
+
+  /* ------------------------------------ */
+  .Message {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #40414f;
+    transform: translate(0px,0px);
+    box-shadow: 5px 5px #34343f;
+  }
+
+  .MsgInput {
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #40414f;
+    border: none;
+    outline: none;
+    width: 94%;
+    height: 30px;
+    transform: translate(5px,-3px);
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  .SendSVG {
+    width: 30px;
+    height: 30px;
+    border-width: 50px;
+    transform: translate(20px,5px);
+    background-size: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+
+  .SendSVG:hover {
+    background-color: #2b2b35;
+  }
+
+  .l {
+    position: absolute;
+    width: 1%;
+    height: 30px;
+    background-color: #2e2f38;
+    transform: translate(-20px,5px);
   }
 

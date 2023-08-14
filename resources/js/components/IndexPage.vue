@@ -3,9 +3,9 @@
         <div class="bg-white page-one shadow rounded overflow-hidden">
             <div class="row p-0 m-0 w-100 h-100">
                 <div class="col-3 h-100  m-0 overflow-y-scroll">
-                    <a href="/" v-for="(user , index) in users" :key="index" class=" mt-2 rounded-0 my-pointer bn w-100 p-2 d-flex justify-content-between align-items-center">
+                    <a :href="'/show/message/'+user.name" v-for="(user , index) in users" :key="index" class=" mt-2 rounded-0 my-pointer bn w-100 p-2 d-flex justify-content-between align-items-center">
                         <div class="image-profile overflow-hidden">
-                            <img :src="user.image" class="w-100 h-100" :alt="user.name">
+                            <img :src="'/'+user.image" class="w-100 h-100" :alt="user.name">
                         </div>
                         <div class="my-color-b-500 name-profile d-flex justify-content-center align-items-center ">
                             <div class=" my-font-IYB my-f-15 m-1">{{ user.name }}</div>
@@ -14,9 +14,30 @@
                     </a>
                 </div>
 
-                <div class="col-9 h-100 m-0">
+                <div class="col-9 h-100 m-0 p-0">
                     <div v-if="box_msg">
-                        if
+                        <div class="w-100 p-4 shadow d-flex justify-content-between align-items-center" style="height: 12vh;">
+                            <div class="my-font-IYB my-f-19 m-1">
+                                {{ name.name }}
+                            </div>
+                            <div class="image-profile overflow-hidden my-sc-1-5">
+                                <img :src="'/'+name.image" class="w-100 h-100"  :alt="name.name">
+                            </div>
+                        </div>
+                        <div class="w-100 box-message" style="height: 70.5vh;">
+
+                        </div>
+                        <div class="w-100 d-flex justify-content-center" style="height: 10vh;">
+                            <div class="Message">
+                                <input title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG">
+                                <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
+                                <path d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
+                                </g>
+                                </svg><span class="l"></span>
+
+                            </div>
+                        </div>
                     </div>
                     <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center">
                         <p>Please select the chat you want, then it is possible to send a message...!</p>
@@ -63,7 +84,8 @@ export default {
   },
   props: {
     users: Object,
-    box_msg:String
+    box_msg:String,
+    name:Object,
   },
 };
 </script>

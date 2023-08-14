@@ -18,7 +18,7 @@ use App\Http\Controllers\MessageController;
 //return auth()->logout();
 Route::controller(MessageController::class)->middleware(['auth'])->group(function () {
     Route::get('/' , 'index')->name('index');
-    Route::get('/show/message' , 'show_message')->name('show.message');
+    Route::get('/show/message/{name}' , 'showMessage')->name('show.message');
 });
 
 Auth::routes();
