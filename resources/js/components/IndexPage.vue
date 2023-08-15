@@ -35,13 +35,12 @@
                         </div>
                         <div class="w-100 d-flex justify-content-center" style="height: 10vh;">
                             <div class="Message">
-                                <input title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text">
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG">
-                                <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
-                                <path d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
-                                </g>
+                                <input v-model="body_message" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text">
+                                <svg @click="sendMessage" xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG my-pointer">
+                                    <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
+                                        <path d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
+                                    </g>
                                 </svg><span class="l"></span>
-
                             </div>
                         </div>
                     </div>
@@ -60,15 +59,43 @@ export default {
   name: "IndexPage",
   data: () => ({
     users_data: null,
+    body_message:null,
+    data_messages:null
   }),
+  methods: {
+    sendMessage()
+    {
+        if(this.body_message != null)
+        {
+            axios.post('/send/message' , {msg:this.body_message , user_get:this.name.id , user_send:this.user.id})
+                .then((res)=>{})
+        }
+    },
+    update_message(e)
+    {
+        if(this.data_messages == null)
+        {
+            this.data_messages = this.messages;
+            this.data_messages.push(e)
+        }else{
+            this.data_messages.push(e)
+        }
+    }
+
+  },
   mounted: () => {
     $('.box-message').animate({
         scrollTop: 9999999999999999999999
         //scrollTop: $('#your-id').offset().top
         //scrollTop: $('.your-class').offset().top
     }, 'fast');
-    Echo.channel(`test_channel`).listen("TestEvent", (e) => {
-      console.log(e.msg);
+    Echo.channel(`send-message`).listen("SendMessage", (e) => {
+        if(e.user_get == this.name.id)
+        {
+            new Audio('/MT.mp3').play();
+        }
+        return console.log(e);
+        //this.messages.push(e)
     });
 
     Echo.join(`status.user`)
@@ -79,14 +106,14 @@ export default {
         axios.post("/edit/status", { status: "online", user: user }).then((res) => {
           $("#status_online_" + user.id).removeClass("status-offline");
           $("#status_online_" + user.id).addClass("status-online");
-          console.log(user);
+          //console.log(user);
         });
       })
       .leaving((user) => {
         axios.post("/edit/status", { status: "ofline", user: user }).then((res) => {
             $("#status_online_" + user.id).removeClass("status-online");
             $("#status_online_" + user.id).addClass("status-offline");
-            console.log(user);
+            //console.log(user);
         });
       })
       .error((error) => {

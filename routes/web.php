@@ -19,6 +19,7 @@ use App\Http\Controllers\MessageController;
 Route::controller(MessageController::class)->middleware(['auth'])->group(function () {
     Route::get('/' , 'index')->name('index');
     Route::get('/show/message/{name}' , 'showMessage')->name('show.message');
+    Route::post('/send/message' , 'sendMessage')->name('send.message');
 });
 
 Auth::routes();

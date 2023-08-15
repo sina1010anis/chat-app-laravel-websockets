@@ -22,5 +22,6 @@ class MessageFactory extends Factory
             'user_get' => rand(6 , 8),
             'user_id' => rand(6 , 8),
         ];
+
     }
 }

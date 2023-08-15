@@ -41,6 +41,18 @@
     float: left;
     background-color: rgb(195, 216, 255);
 }
+
+.box-message::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    display: none;
+}
+
+.box-message::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 100px;
+}
+
 /* ------------------ */
 button {
     --border-radius: 25px;
