@@ -12,7 +12,9 @@ class MessageController extends Controller
     public function index()
     {
         $users= User::where('id' , '!=' , auth()->user()->id)->latest('id')->get();
-        return view('welcome' , compact('users'));
+        $box_msg = false;
+        $name= null;
+        return view('welcome' , compact('users' , 'box_msg' , 'name'));
     }
 
     public function editStatus(Request $request)
