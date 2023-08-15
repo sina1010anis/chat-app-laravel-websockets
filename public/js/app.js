@@ -20446,6 +20446,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.box-message').animate({
+      scrollTop: 9999999999999999999999
+      //scrollTop: $('#your-id').offset().top
+      //scrollTop: $('.your-class').offset().top
+    }, 'fast');
     Echo.channel("test_channel").listen("TestEvent", function (e) {
       console.log(e.msg);
     });
@@ -20476,7 +20481,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     users: Object,
     box_msg: String,
-    name: Object
+    name: Object,
+    messages: Object,
+    user: Object
   }
 });
 
@@ -20505,7 +20512,10 @@ var _hoisted_3 = {
   "class": "row p-0 m-0 w-100 h-100"
 };
 var _hoisted_4 = {
-  "class": "col-3 h-100 m-0 overflow-y-scroll"
+  "class": "col-3 h-100 m-0 overflow-y-scroll",
+  style: {
+    "z-index": "5"
+  }
 };
 var _hoisted_5 = ["href"];
 var _hoisted_6 = {
@@ -20538,13 +20548,30 @@ var _hoisted_15 = {
   "class": "image-profile overflow-hidden my-sc-1-5"
 };
 var _hoisted_16 = ["src", "alt"];
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-100 box-message overflow-y-scroll p-3\" style=\"height:70.5vh;\"><div class=\"msg msg-am my-2 px-2 py-1 rounded\"><p dir=\"rtl\" class=\"text-end pt-2 my-font-IYM my-f-16 my-color-bl\">hi...!</p><hr class=\"bg-secondary p-0 m-0\"><p class=\"my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0\">199/19/99 00:00:00</p></div><div class=\"msg msg-you my-2 px-2 py-1 rounded\"><p dir=\"rtl\" class=\"text-end pt-2 my-font-IYM my-f-16 my-color-bl\">hi...!</p><hr class=\"bg-secondary p-0 m-0\"><p class=\"my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0\">199/19/99 00:00:00</p></div></div><div class=\"w-100 d-flex justify-content-center\" style=\"height:10vh;\"><div class=\"Message\"><input title=\"Write Message\" tabindex=\"i\" pattern=\"\\d+\" placeholder=\"Message..\" class=\"MsgInput\" type=\"text\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.0\" width=\"30.000000pt\" height=\"30.000000pt\" viewBox=\"0 0 30.000000 30.000000\" preserveAspectRatio=\"xMidYMid meet\" class=\"SendSVG\"><g transform=\"translate(0.000000,30.000000) scale(0.100000,-0.100000)\" fill=\"#ffffff70\" stroke=\"none\"><path d=\"M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z\"></path></g></svg><span class=\"l\"></span></div></div>", 2);
+var _hoisted_17 = {
+  "class": "w-100 box-message overflow-y-scroll p-3",
+  style: {
+    "height": "70.5vh"
+  }
+};
+var _hoisted_18 = ["onKey"];
 var _hoisted_19 = {
+  dir: "rtl",
+  "class": "text-end pt-2 my-font-IYM my-f-16 my-color-bl"
+};
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+  "class": "bg-secondary p-0 m-0"
+}, null, -1 /* HOISTED */);
+var _hoisted_21 = {
+  "class": "my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0"
+};
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-100 d-flex justify-content-center\" style=\"height:10vh;\"><div class=\"Message\"><input title=\"Write Message\" tabindex=\"i\" pattern=\"\\d+\" placeholder=\"Message..\" class=\"MsgInput\" type=\"text\"><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.0\" width=\"30.000000pt\" height=\"30.000000pt\" viewBox=\"0 0 30.000000 30.000000\" preserveAspectRatio=\"xMidYMid meet\" class=\"SendSVG\"><g transform=\"translate(0.000000,30.000000) scale(0.100000,-0.100000)\" fill=\"#ffffff70\" stroke=\"none\"><path d=\"M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z\"></path></g></svg><span class=\"l\"></span></div></div>", 1);
+var _hoisted_23 = {
   key: 1,
   "class": "w-100 h-100 d-flex justify-content-center align-items-center"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Please select the chat you want, then it is possible to send a message...!", -1 /* HOISTED */);
-var _hoisted_21 = [_hoisted_20];
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Please select the chat you want, then it is possible to send a message...!", -1 /* HOISTED */);
+var _hoisted_25 = [_hoisted_24];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.users, function (user, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
@@ -20563,7 +20590,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     src: '/' + $props.name.image,
     "class": "w-100 h-100",
     alt: $props.name.name
-  }, null, 8 /* PROPS */, _hoisted_16)])]), _hoisted_17])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, _hoisted_21))])])])]);
+  }, null, 8 /* PROPS */, _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.messages, function (msg, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      onKey: index
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(msg.user_id == $props.user.id ? 'msg my-2 px-2 py-1 rounded   msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you')
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(msg.body), 1 /* TEXT */), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(msg.created_at), 1 /* TEXT */)], 2 /* CLASS */)], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_18);
+  }), 256 /* UNKEYED_FRAGMENT */))]), _hoisted_22])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, _hoisted_25))])])])]);
 }
 
 /***/ }),
