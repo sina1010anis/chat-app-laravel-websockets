@@ -4,12 +4,16 @@
             <div class="row p-0 m-0 w-100 h-100">
                 <div class="col-3 h-100  m-0 overflow-y-scroll" style="z-index:5">
                     <a :href="'/show/message/'+user.name" v-for="(user , index) in users" :key="index" class=" mt-2 rounded-0 my-pointer bn w-100 p-2 d-flex justify-content-between align-items-center">
-                        <div class="image-profile overflow-hidden">
+                        <div v-if="new_message.includes(user.id)" class="image-profile overflow-hidden foucs-new-message">
                             <img :src="'/'+user.image" class="w-100 h-100" :alt="user.name">
+                            <div :id="'status_online_'+user.id" :class="(user.status == 1) ? 'status-online' : 'status-offline'" class="view-status-user"></div>
+                        </div>
+                        <div v-else class="image-profile overflow-hidden">
+                            <img :src="'/'+user.image" class="w-100 h-100" :alt="user.name">
+                            <div :id="'status_online_'+user.id" :class="(user.status == 1) ? 'status-online' : 'status-offline'" class="view-status-user"></div>
                         </div>
                         <div class="my-color-b-500 name-profile d-flex justify-content-center align-items-center ">
                             <div class=" my-font-IYB my-f-15 m-1">{{ user.name }}</div>
-                            <div :id="'status_online_'+user.id" :class="(user.status == 1) ? 'status-online' : 'status-offline'"></div>
                         </div>
                     </a>
                 </div>
@@ -24,8 +28,17 @@
                                 <img :src="'/'+name.image" class="w-100 h-100"  :alt="name.name">
                             </div>
                         </div>
-                        <div class="w-100 box-message overflow-y-scroll p-3" style="height: 70.5vh;">
+                        <div v-if="data_messages == null" class="w-100 box-message overflow-y-scroll p-3" style="height: 70.5vh;">
                             <div v-for="(msg , index) in messages" @key="index" >
+                                <div :class=" (msg.user_id == user.id) ? 'msg my-2 px-2 py-1 rounded   msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you'" >
+                                    <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">{{msg.body}}</p>
+                                    <hr class="bg-secondary p-0 m-0">
+                                    <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">{{msg.created_at}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="w-100 box-message overflow-y-scroll p-3" style="height: 70.5vh;">
+                            <div v-for="(msg , index) in data_messages" @key="index" >
                                 <div :class=" (msg.user_id == user.id) ? 'msg my-2 px-2 py-1 rounded   msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you'" >
                                     <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">{{msg.body}}</p>
                                     <hr class="bg-secondary p-0 m-0">
@@ -58,6 +71,7 @@ import $ from "jquery";
 export default {
   name: "IndexPage",
   data: () => ({
+    version:'version 3Vue',
     users_data: null,
     body_message:null,
     data_messages:null
@@ -68,7 +82,7 @@ export default {
         if(this.body_message != null)
         {
             axios.post('/send/message' , {msg:this.body_message , user_get:this.name.id , user_send:this.user.id})
-                .then((res)=>{})
+                .then((res)=>{this.body_message = null})
         }
     },
     update_message(e)
@@ -80,22 +94,18 @@ export default {
         }else{
             this.data_messages.push(e)
         }
-    }
+    },
 
   },
-  mounted: () => {
-    $('.box-message').animate({
-        scrollTop: 9999999999999999999999
-        //scrollTop: $('#your-id').offset().top
-        //scrollTop: $('.your-class').offset().top
-    }, 'fast');
-    Echo.channel(`send-message`).listen("SendMessage", (e) => {
-        if(e.user_get == this.name.id)
-        {
-            new Audio('/MT.mp3').play();
-        }
-        return console.log(e);
-        //this.messages.push(e)
+  beforeCreate() {
+        Echo.channel(`send-message`).listen("SendMessage", (e) => {
+            this.data_messages = this.messages
+            this.data_messages.unshift(e)
+            console.log(e);
+            if(e.user_get == this.user.id)
+            {
+                new Audio('/MT.mp3').play();
+            }
     });
 
     Echo.join(`status.user`)
@@ -120,12 +130,14 @@ export default {
         console.error(error);
       });
   },
+
   props: {
     users: Object,
     box_msg:String,
     name:Object,
     messages:Object,
-    user:Object
+    user:Object,
+    new_message:Object
   },
 };
 </script>

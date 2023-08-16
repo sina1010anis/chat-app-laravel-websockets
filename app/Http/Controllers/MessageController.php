@@ -13,13 +13,25 @@ class MessageController extends Controller
 {
     use UserStatus;
 
-
+    private function status_message()
+    {
+        $id_users=[];
+        if(auth()->check()){
+            $status_profile = Message::where(['status' => 0 , 'user_get' => auth()->user()->id])->get('user_send');
+            foreach($status_profile as $i)
+            {
+                array_push($id_users , $i->user_send);
+            }
+            return array_unique($id_users);
+        }
+    }
     public function index()
     {
         $users= User::where('id' , '!=' , auth()->user()->id)->latest('id')->get();
         $box_msg = false;
         $name= null;
-        return view('welcome' , compact('users' , 'box_msg' , 'name'))->with(['user' => $this->user()]);
+
+        return view('welcome' , compact('users' , 'box_msg' , 'name'))->with(['user' => $this->user() , 'new_message' => $this->status_message()]);
     }
 
     public function editStatus(Request $request)
@@ -31,10 +43,11 @@ class MessageController extends Controller
 
     public function showMessage(User $name)
     {
-        $users= User::where('id' , '!=' , auth()->user()->id)->latest('id')->get();
+        $users= User::where('id' , '!=' , auth()->user()->id)->where('id', '!=' , $name->id)->latest('id')->get();
         $box_msg = true;
         $messages= Message::whereIn('user_send' , [auth()->user()->id,$name->id])->whereIn('user_get' , [auth()->user()->id,$name->id])->latest('id')->get();
-        return view('welcome' , compact('users' , 'box_msg' , 'name' , 'messages'))->with(['user' => $this->user()]);
+        Message::where(['user_send' => $name->id , 'user_get' => auth()->user()->id])->update(['status'=>1]);
+        return view('welcome' , compact('users' , 'box_msg' , 'name' , 'messages'))->with(['user' => $this->user() , 'new_message' => $this->status_message()]);
     }
 
     public function sendMessage(Request $request)
@@ -43,6 +56,7 @@ class MessageController extends Controller
             'body'=>$request->msg,
             'user_get'=>$request->user_get,
             'user_send'=>$request->user_send,
+            'status' => 0,
             'user_id'=>auth()->user()->id,
         ]);
         event(new SendMessage($request->msg , $request->user_send , $request->user_get , auth()->user()->id));

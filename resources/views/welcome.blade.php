@@ -11,7 +11,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <index-page :users="{{$users}}" :user="{{$user}}" :box_msg="{{(isset($box_msg)) ? $box_msg : null}}" :messages="{{(isset($messages)) ? $messages : null}}" :name="{{$name}}"/>
+            <index-page :new_message="{{json_encode($new_message)}}" :users="{{$users}}" :user="{{$user}}" :box_msg="{{(isset($box_msg)) ? $box_msg : null}}" :messages="{{(isset($messages)) ? $messages : null}}" :name="{{$name}}"/>
         </div>
     </body>
 </html>
