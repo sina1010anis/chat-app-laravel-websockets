@@ -4,11 +4,11 @@
             <div class="row p-0 m-0 w-100 h-100">
                 <div class="col-3 h-100  m-0 overflow-y-scroll" style="z-index:5">
                     <a :href="'/show/message/'+user.name" v-for="(user , index) in users" :key="index" class=" mt-2 rounded-0 my-pointer bn w-100 p-2 d-flex justify-content-between align-items-center">
-                        <div v-if="new_message.includes(user.id)" class="image-profile overflow-hidden foucs-new-message">
+                        <div v-if="new_message.includes(user.id)" :id="'user_message_'+user.id" class="image-profile overflow-hidden foucs-new-message">
                             <img :src="'/'+user.image" class="w-100 h-100" :alt="user.name">
                             <div :id="'status_online_'+user.id" :class="(user.status == 1) ? 'status-online' : 'status-offline'" class="view-status-user"></div>
                         </div>
-                        <div v-else class="image-profile overflow-hidden">
+                        <div v-else class="image-profile overflow-hidden" :id="'user_message_'+user.id">
                             <img :src="'/'+user.image" class="w-100 h-100" :alt="user.name">
                             <div :id="'status_online_'+user.id" :class="(user.status == 1) ? 'status-online' : 'status-offline'" class="view-status-user"></div>
                         </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="w-100 d-flex justify-content-center" style="height: 10vh;">
                             <div class="Message">
-                                <input v-model="body_message" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text">
+                                <input v-model="body_message" @keyup.enter="sendMessage" title="Write Message" tabindex="i" pattern="\d+" placeholder="Message.." class="MsgInput" type="text">
                                 <svg @click="sendMessage" xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG my-pointer">
                                     <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
                                         <path d="M44 256 c-3 -8 -4 -29 -2 -48 3 -31 5 -33 56 -42 28 -5 52 -13 52 -16 0 -3 -24 -11 -52 -16 -52 -9 -53 -9 -56 -48 -2 -21 1 -43 6 -48 10 -10 232 97 232 112 0 7 -211 120 -224 120 -4 0 -9 -6 -12 -14z"></path>
@@ -97,21 +97,22 @@ export default {
     },
 
   },
-  beforeCreate() {
+  created() {
         Echo.channel(`send-message`).listen("SendMessage", (e) => {
-            this.data_messages = this.messages
-            this.data_messages.unshift(e)
-            console.log(e);
-            if(e.user_get == this.user.id)
-            {
-                new Audio('/MT.mp3').play();
+            if(this.messages != ''){
+                this.data_messages = this.messages
+                this.data_messages.unshift(e)
             }
-    });
+            if(e.user_get == this.user.id){
+                $('#user_message_'+e.user_send).addClass('foucs-new-message')
+                return new Audio('/MT.mp3').play();
+            }
+        });
 
-    Echo.join(`status.user`)
-      .here((users) => {
-        // ...
-      })
+        Echo.join(`status.user`)
+        .here((users) => {
+            // ...
+        })
       .joining((user) => {
         axios.post("/edit/status", { status: "online", user: user }).then((res) => {
           $("#status_online_" + user.id).removeClass("status-offline");

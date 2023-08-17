@@ -11,7 +11,14 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <index-page :new_message="{{json_encode($new_message)}}" :users="{{$users}}" :user="{{$user}}" :box_msg="{{(isset($box_msg)) ? $box_msg : null}}" :messages="{{(isset($messages)) ? $messages : null}}" :name="{{$name}}"/>
+            <index-page
+                :new_message="{{json_encode($new_message)}}"
+                :users="{{$users}}"
+                :user="{{$user}}"
+                @if(isset($box_msg)) :box_msg="{{$box_msg}}" @else :box_msg="" @endif
+                @if(isset($messages)) :messages="{{$messages}}" @else :messages="" @endif
+                :name="{{$name}}"
+            />
         </div>
     </body>
 </html>
