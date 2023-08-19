@@ -16,6 +16,9 @@ use App\Http\Controllers\MessageController;
 |
 */
 //return auth()->logout();
+Route::get('/test' , function(){
+    return User::all();
+});
 Route::controller(MessageController::class)->middleware(['auth'])->group(function () {
     Route::get('/' , 'index')->name('index');
     Route::get('/show/message/{name}' , 'showMessage')->name('show.message');

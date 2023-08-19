@@ -46,7 +46,7 @@ class MessageController extends Controller
         $users= User::where('id' , '!=' , auth()->user()->id)->where('id', '!=' , $name->id)->latest('id')->get();
         $box_msg = true;
         $messages= Message::whereIn('user_send' , [auth()->user()->id,$name->id])->whereIn('user_get' , [auth()->user()->id,$name->id])->latest('id')->get();
-        Message::whereIn('user_send' , [auth()->user()->id,$name->id])->whereIn('user_get' , [auth()->user()->id,$name->id])->update(['status'=>1]);
+        Message::whereIn('user_send' , [auth()->user()->id,$name->id])->whereIn('user_get' , [auth()->user()->id,$name->id])->update(['status'=>1 , 'view'=>1]);
         return view('welcome' , compact('users' , 'box_msg' , 'name' , 'messages'))->with(['user' => $this->user() , 'new_message' => $this->status_message()]);
     }
 
@@ -58,6 +58,7 @@ class MessageController extends Controller
             'user_send'=>$request->user_send,
             'status' => 0,
             'user_id'=>auth()->user()->id,
+            'view'=> 0
         ]);
         event(new SendMessage($request->msg , $request->user_send , $request->user_get , auth()->user()->id));
         return [

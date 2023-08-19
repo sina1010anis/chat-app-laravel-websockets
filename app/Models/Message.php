@@ -14,7 +14,8 @@ class Message extends Model
         'user_send',
         'user_get',
         'user_id',
-        'status'
+        'status',
+        'view'
     ];
 
     public function user()

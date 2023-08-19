@@ -30,10 +30,13 @@
                         </div>
                         <div v-if="data_messages == null" class="w-100 box-message overflow-y-scroll p-3" style="height: 70.5vh;">
                             <div v-for="(msg , index) in messages" @key="index" >
-                                <div :class=" (msg.user_id == user.id) ? 'msg my-2 px-2 py-1 rounded   msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you'" >
+                                <div :class=" (msg.user_id == user.id) ? 'msg my-2 px-2 py-1 rounded msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you'" >
                                     <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">{{msg.body}}</p>
                                     <hr class="bg-secondary p-0 m-0">
-                                    <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">{{msg.created_at}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">{{msg.created_at}}</p>
+                                        <i v-if="msg.user_id == user.id" :class=" (msg.view == 1) ? 'bi my-color-b-500 bi-check-all' : 'bi my-color-b-500 bi-check'"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +45,10 @@
                                 <div :class=" (msg.user_id == user.id) ? 'msg my-2 px-2 py-1 rounded   msg-am' : 'msg my-2 px-2 py-1 rounded   msg-you'" >
                                     <p  dir="rtl" class=" text-end pt-2 my-font-IYM my-f-16 my-color-bl">{{msg.body}}</p>
                                     <hr class="bg-secondary p-0 m-0">
-                                    <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">{{msg.created_at}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="my-font-IYL my-f-13 my-color-b-500 p-0 py-1 m-0">{{msg.created_at}}</p>
+                                        <i v-if="msg.user_id == user.id" :class=" (msg.view == 1) ? 'bi my-color-b-500 bi-check-all' : 'bi my-color-b-500 bi-check'"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +113,7 @@ export default {
                 $('#user_message_'+e.user_send).addClass('foucs-new-message')
                 return new Audio('/MT.mp3').play();
             }
+            //if(){}
         });
 
         Echo.join(`status.user`)
