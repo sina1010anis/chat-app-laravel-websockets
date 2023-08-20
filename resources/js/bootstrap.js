@@ -26,9 +26,16 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '1111122222',
     cluster:'mt1',
-    wsHost: 'https://testapp.runflare.run',
-    wsPort: 6001,
-    wssPort: 6001,
-    forceTLS: false,
+
+        wsHost: 'localhost',
+        wsPort: 6001,
+        wssPort: 6001,
+
+    forceTLS:false,
     enabledTransports: ['ws', 'wss'],
 });
+    // Local
+        // wsHost: 'localhost',
+        // wsPort: 6001,
+        // wssPort: 6001,
+    // Host

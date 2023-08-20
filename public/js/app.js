@@ -20801,12 +20801,17 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
   broadcaster: 'pusher',
   key: '1111122222',
   cluster: 'mt1',
-  wsHost: 'https://testapp.runflare.run',
+  wsHost: 'localhost',
   wsPort: 6001,
   wssPort: 6001,
   forceTLS: false,
   enabledTransports: ['ws', 'wss']
 });
+// Local
+// wsHost: 'localhost',
+// wsPort: 6001,
+// wssPort: 6001,
+// Host
 
 /***/ }),
 
