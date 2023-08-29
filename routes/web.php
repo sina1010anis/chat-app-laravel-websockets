@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
@@ -17,7 +18,8 @@ use App\Http\Controllers\MessageController;
 */
 //return auth()->logout();
 Route::get('/test' , function(){
-    return User::all();
+    return Product::create(['name' => 'test' , 'price'=>2500]);
+    //return User::all();
 });
 Route::controller(MessageController::class)->middleware(['auth'])->group(function () {
     Route::get('/' , 'index')->name('index');

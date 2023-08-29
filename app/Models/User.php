@@ -45,7 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    public function check_email()
+    {
+        return $this->email;
+    }
     public function messages()
     {
         return $this->hasMany(Message::class , 'user_id' , 'id');
