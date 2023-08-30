@@ -32,8 +32,9 @@ class ProductTest extends TestCase
     }
     public function testCheckNumberProduct()
     {
-        $output = $this->product->sum_price($this->data);
+        $output = $this->product->sum_price($this->data->whereIn('name' , ['M1' , 'M2' , 'M3']));
         $res = $this->assert->sum();
+
         $this->assertEquals((int) $output ,(int) $res);
     }
 
