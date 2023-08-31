@@ -28,9 +28,9 @@ class NewProductTest extends TestCase
     public function testNewProductAndStoreInDatabase(): void
     {
 
-        $this->assertFalse($this->product_model->countProduct($this->product));
+        $this->assertFalse($this->product_model->countProductByName($this->product));
         $this->product_model->newProduct($this->product);
-        $this->assertTrue($this->product_model->countProduct($this->product));
+        $this->assertTrue($this->product_model->countProductByName($this->product));
 
     }
 

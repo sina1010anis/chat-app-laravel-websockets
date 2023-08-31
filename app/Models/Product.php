@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\TraitClass\Product\Count;
+use App\Models\TraitClass\Product\Validate;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Product extends Model
 {
 
-    use HasFactory;
+    use HasFactory, Validate, Count;
     public $price_model = 0;
     protected $fillable = [
         'name',
@@ -45,24 +48,10 @@ class Product extends Model
         return $this->price_model;
 
     }
-
-    public function validate($data)
-    {
-
-        return $data->name != '' && $data->price > 0;
-
-    }
-    public function countProduct(Product $product): bool
-    {
-
-        return !! (!$this->validate($product)) ?: $this->whereName($product->name)->count();
-
-    }
-
     public function newProduct(Product $product)
     {
 
-        return (!$this->validate($product)) ?: $this->create([
+        return (!$this->validateForNameAndPrice($product)) ?: $this->create([
                     'name' => $product->name,
                     'price' => $product->price
                 ]);
@@ -72,7 +61,17 @@ class Product extends Model
     public function getProduct($name)
     {
 
-        return (!isset($name)) ?: $this->whereName($name)->first();
+        return $this->whereName($name)->first();
 
+    }
+
+    public function updateProduct(Product $product, Request $request): bool
+    {
+        return $product->update(['name' => $request->name_new, 'price' => $request->price]);
+    }
+
+    public function checkHasName(Product $product, string $new_name): bool
+    {
+        return $product->name == $new_name;
     }
 }
