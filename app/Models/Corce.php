@@ -9,34 +9,56 @@ use Illuminate\Foundation\Testing\DatabaseTruncation;
 
 class Corce extends Model
 {
-    use HasFactory, DatabaseTruncation ;
 
-    public bool $buy_status=false;
+    use HasFactory;
+    use DatabaseTruncation;
 
-    protected $fillable = ['title' , 'price' , 'type'];
+    protected $fillable = ['title', 'price', 'type'];
+    public bool $buy_status = false;
 
-    public function updateVip(Corce $corce, Bool $vip= true):bool
+    public function updateVip(Corce $corce, Bool $vip = true): bool
     {
-        return ($vip)? $this->find($corce->id)->update(['type' => 'vip']) : false;
+
+        return ($vip) ? $this->find($corce->id)->update(['type' => 'vip']) : false;
+
     }
 
-    public function buyCorceVip(Corce $corce , Customer $customer):void
+    public function buyCorceVip(Corce $corce, Customer $customer): void
     {
-        if($customer->role == "vip"){
-            $corce->buyCorce($corce , $customer);
+
+        if ($customer->role == "vip") {
+
+            $corce->buyCorce($corce, $customer);
             $this->buy_status = true;
-        }else{
+
+        } else {
+
             $this->buy_status = false;
+
         }
+
     }
 
-    public function buyCorce(Corce $corce , Customer $customer)
+    public function buyCorce(Corce $corce, Customer $customer)
     {
-        return FactorFactory::new()->count(1)->create();
+
+        if (FactorFactory::new()->count(1)->create()) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
     }
 
-    public function getBuy_status()
+    public function getBuyStatus()
     {
+
         return $this->buy_status;
+
     }
+
 }

@@ -19,7 +19,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->lastName(),
-            'role' => $this->role[rand(0,1)]
+            'role' => 'vip' //$this->role[rand(0,1)]
         ];
     }
 }

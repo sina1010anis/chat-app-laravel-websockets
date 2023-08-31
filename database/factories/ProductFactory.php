@@ -5,11 +5,10 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Corce>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
-class CorceFactory extends Factory
+class ProductFactory extends Factory
 {
-    use setRole;
     /**
      * Define the model's default state.
      *
@@ -17,10 +16,11 @@ class CorceFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            'title' => fake()->title(),
-            'price' => rand(1000,9000),
-            'type' => 'vip' //$this->role[rand(0,1)],
+            'name' => fake()->domainName(),
+            'price' => rand(1000, 9000)
         ];
+
     }
 }
