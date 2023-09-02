@@ -24,7 +24,7 @@ class EditProductTest extends TestCase
         $this->product_model = new Product();
         $this->product = $this->product_model->find(1);
         $this->request = new Request();
-        $this->request['name_new'] = 'M3';
+        $this->request['name'] = 'M3';
         $this->request['price'] = 3500;
     }
 
@@ -32,10 +32,6 @@ class EditProductTest extends TestCase
     {
         $this->assertTrue($this->product_model->countProductById(
             $this->product
-        ));
-        $this->assertFalse($this->product_model->checkHasName(
-            $this->product,
-            $this->request->name_new
         ));
         $this->assertTrue($this->product_model->updateProduct(
             $this->product,

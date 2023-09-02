@@ -9,7 +9,7 @@ trait Validate
     public function validateForNameAndPrice($data)
     {
 
-        return $data->name != '' && $data->price > 0;
+        return $data->name != null && $data->price > 1;
 
     }
 

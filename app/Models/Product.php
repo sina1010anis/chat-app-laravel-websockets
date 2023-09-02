@@ -48,7 +48,7 @@ class Product extends Model
         return $this->price_model;
 
     }
-    public function newProduct(Product $product)
+    public function newProduct($product)
     {
 
         return (!$this->validateForNameAndPrice($product)) ?: $this->create([
@@ -67,11 +67,16 @@ class Product extends Model
 
     public function updateProduct(Product $product, Request $request): bool
     {
-        return $product->update(['name' => $request->name_new, 'price' => $request->price]);
+        return $product->update(['name' => $request->name, 'price' => $request->price]);
     }
 
     public function checkHasName(Product $product, string $new_name): bool
     {
         return $product->name == $new_name;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'name';
     }
 }

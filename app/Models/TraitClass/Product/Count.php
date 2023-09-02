@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 trait Count
 {
 
-    public function countProductByName(Product $product): bool
+    public function countProductByName($product): bool
     {
-
-        return !! (!$this->validateForNameAndPrice($product)) ?: $this->whereName($product->name)->count();
-
+        return !! (!$this->validateForNameAndPrice($product)) ? false : $this->whereName($product->name)->count();
     }
+
+
     public function countProductById(Product $product): bool
     {
 

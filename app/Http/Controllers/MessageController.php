@@ -2,17 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewProduct;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Message;
 use App\Rep\UserStatus;
 use App\Events\SendMessage;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
     use UserStatus;
 
+    public function file_test(NewProduct $request, Product $product)
+    {
+        if (!$product->countProductByName($request)) {
+            $product->newProduct($request);
+            return (!$product->countProductByName($request)) ?:'Done';
+        }
+        return 'Validate Error';
+    }
+    public function time()
+    {
+        return view('file_test');
+        $product = \App\Models\Product::first();
+
+        $now_time = Carbon::now();
+
+        return ($product->created_at > $now_time->addMinutes(2))
+            ? 'Your time is less than 2 minutes more than the current time.'.'Time Now(add 2 Minute)= '.$now_time.' My Time = '.Carbon::now()
+            : 'Your time is more than 2 minutes longer than the current time.'.'Time Now(add 2 Minute)= '.$now_time.' My Time = '.Carbon::now();
+
+    }
     private function status_message()
     {
         $id_users=[];
